@@ -2,6 +2,7 @@ captureNDHU 捕捉，東華。
 ==========================
 
 node.js version: v0.10.32
+jquery  version: 2.1.1
 ==========================
 Ref. 
 
