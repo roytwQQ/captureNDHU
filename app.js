@@ -32,9 +32,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 /*------------ START url to router------------------*/
-app.use('/index', routes);
-app.use('/', photos);
-app.use('/upload', photos);
+app.use('/photos', photos);
+app.use('/', routes);
+// app.use('/upload', photos);
 app.use('/users', users);
 /*------------ END url to router------------------*/
 

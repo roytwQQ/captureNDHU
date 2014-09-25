@@ -43,7 +43,7 @@ name: name,
 path: img.name
 }, function (err) {
 if (err) return next(err);
-res.redirect('/');
+res.redirect('/photos');
 });
 });
 
