@@ -1,8 +1,25 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+#intro {
+
+	background-image: url("/images/soso.jpg");
+
 }
 
-a {
-  color: #00B7FF;
+#about {
+	background-image: url("/images/sogo.jpg");
+}
+
+#about {
+	background-image: url("/images/sogo.jpg");
+}
+
+#services {
+	background-image: url("/images/index_3.jpg");
+}
+
+#contact {
+	background-image: url("/images/index_4.jpg");
+}
+
+.photos {
+	width: 100%;
 }

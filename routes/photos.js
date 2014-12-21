@@ -12,13 +12,27 @@ var multipartMiddleware = multipart();
 
 
 router.get('/', function(req, res, next) {
-	Photo.find({}, function(err, photos){
-		if (err) return next(err);
+	// Photo.find({}, function(err, photos){
+	// 	if (err) return next(err);
+	// 	res.render('photos', {
+	// 	title: 'Photos',
+	// 	photos: photos
+	// 	});
+	// 	});
+
+
+Photo.find()
+.sort({'_id': -1})
+.exec(function(err, photos) {
+    // code here
+    if (err) return next(err);
 		res.render('photos', {
 		title: 'Photos',
 		photos: photos
 		});
-		});
+});
+
+
 
 });
 
@@ -35,7 +49,8 @@ router.get('/upload', function(req, res) {
 router.post('/upload', multipartMiddleware, function(req, res, next) {
 var img = req.files.photo.image;
 var name = req.body.photo.name || img.name;
-var path = join(global.photosDir, img.name);
+var nowTime = (new Date().getTime());
+var path = join(global.photosDir, nowTime+img.name);
 
 var is = fs.createReadStream(img.path);
 var os = fs.createWriteStream(path);
@@ -45,7 +60,7 @@ is.on('end',function() {
     fs.unlinkSync(img.path);
     Photo.create({
 	name: name,
-	path: img.name
+	path: nowTime+img.name 
 	}, function (err) {
 	if (err) return next(err);
 	res.redirect('/photos');
