@@ -17,14 +17,37 @@
 
     <link href="../stylesheets/style.css" rel="stylesheet">
     
+ <script src="../javascripts/thirdParty/jquery-2.1.1.min.js"></script>
+    <!-- Add fancyBox -->
+        <link rel="stylesheet" href="../javascripts/thirdParty/fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
+        <script type="text/javascript" src="../javascripts/thirdParty/fancybox/source/jquery.fancybox.pack.js"></script>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        <!-- Optionally add helpers - button, thumbnail and/or media -->
+        <link rel="stylesheet" href="../javascripts/thirdParty/fancybox/source/helpers/jquery.fancybox-buttons.css" type="text/css" media="screen" />
+        <script type="text/javascript" src="../javascripts/thirdParty/fancybox/source/helpers/jquery.fancybox-buttons.js"></script>
+        <script type="text/javascript" src="../javascripts/thirdParty/fancybox/source/helpers/jquery.fancybox-media.js"></script>
 
+        <link rel="stylesheet" href="../javascripts/thirdParty/fancybox/source/helpers/jquery.fancybox-thumbs.css" type="text/css" media="screen" />
+        <script type="text/javascript" src="../javascripts/thirdParty/fancybox/source/helpers/jquery.fancybox-thumbs.js"></script>
+
+
+        <!-- my own code-->
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(".fancybox").fancybox();
+                $(".various").fancybox({
+                    maxWidth    : 800,
+                    maxHeight   : 600,
+                    fitToView   : false,
+                    width       : '70%',
+                    height      : '70%',
+                    autoSize    : false,
+                    closeClick  : false,
+                    openEffect  : 'none',
+                    closeEffect : 'none'
+                });
+            });
+        </script>
 </head>
 
 <!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
@@ -76,10 +99,15 @@
                     <h1 class="fortest">Photos</h1>
                     <p>Express stock photo application.</p>
                     <div id="photos" class="col-lg-12">
-                    <% photos.forEach(function(photo) { %>
+                    <% photos.forEach(function(photo, index) { %>
 	                    <div class="photos" class="col-lg-12">
 		                    <div><%=photo.name%></div>
+                            <a class="various" href="#hideInfo_<%=index %>">more detail</a>
 		                    <img class="photos" src='/photos/<%=photo.path%>'/>
+                            <div id="hideInfo_<%=index %>" style="display:none;">
+                                hahaah
+                               <%=photo.path%> 
+                            </div>
 	                    </div>
                     <% }) %>
 
@@ -89,17 +117,17 @@
         </div>
     </section>
 
-    
+    <a class="various" rel="group" href="#inlinetest"><img src="small_image_1.jpg" alt="" /></a>
 
 
     <div class="footer">
       <div class="container">
-        <p class="text-muted">Place sticky footer content here.</p>
+        <p id="inlinetest" class="text-muted">Place sticky footer content here.</p>
       </div>
     </div>
 
     <!-- jQuery Version 1.11.0 -->
-    <script src="../javascripts/thirdParty/jquery-2.1.1.min.js"></script>
+   
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../javascripts/thirdParty/bootstrap.min.js"></script>
