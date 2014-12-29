@@ -24,6 +24,10 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
+
+
+
 </head>
 
 <!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
@@ -78,6 +82,9 @@
                         
                             <input type='text', name='photo[name]', placeholder='Name'/>
                             <input type='file', name='photo[image]'/>
+
+                             <input style="display:none;" id="longitude" type='text', name='photo[longitude]', placeholder='@@'/>
+                             <input style="display:none;" id="latitude" type='text', name='photo[latitude]', placeholder='@@'/>
                         <p><input type='submit', value='Upload'/></p>
                         </form>
                 </div>
@@ -104,7 +111,30 @@
     <script src="../javascripts/thirdParty/jquery.easing.min.js"></script>
     <script src="../javascripts/thirdParty/scrolling-nav.js"></script>
 
+<script>
+    $(document).ready(function(){
+        getLocation();
 
+    });
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            // alert('@@');
+            navigator.geolocation.getCurrentPosition(showPosition);
+            console.log("good");
+        } else { 
+           console.log("gps failed");
+        }
+    }
+
+    function showPosition(position) {
+        // alert(position.coords.latitude);
+        $("#latitude").val(position.coords.latitude);
+        $("#longitude").val(position.coords.longitude);
+        // x.innerHTML = "Latitude: " + position.coords.latitude + 
+        // "<br>Longitude: " + position.coords.longitude;  
+    }
+    </script>
 
 
 </body></html>

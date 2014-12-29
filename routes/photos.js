@@ -47,6 +47,10 @@ router.get('/upload', function(req, res) {
 
 
 router.post('/upload', multipartMiddleware, function(req, res, next) {
+
+var longitude = req.body.photo.longitude;
+var latitude = req.body.photo.latitude;
+
 var img = req.files.photo.image;
 var name = req.body.photo.name || img.name;
 var nowTime = (new Date().getTime());
@@ -60,6 +64,8 @@ is.on('end',function() {
     fs.unlinkSync(img.path);
     Photo.create({
 	name: name,
+	longitude: longitude,
+	latitude: latitude,
 	path: nowTime+img.name 
 	}, function (err) {
 	if (err) return next(err);

@@ -30,6 +30,9 @@
         <link rel="stylesheet" href="../javascripts/thirdParty/fancybox/source/helpers/jquery.fancybox-thumbs.css" type="text/css" media="screen" />
         <script type="text/javascript" src="../javascripts/thirdParty/fancybox/source/helpers/jquery.fancybox-thumbs.js"></script>
 
+		<script type="text/javascript"
+	      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCKxiYt0AMWRbyJ6yimvJ3fBZ0-VeHzYYw&sensor=TRUE">
+	    </script>
 
         <!-- my own code-->
         <script type="text/javascript">
@@ -38,9 +41,9 @@
                 $(".various").fancybox({
                     maxWidth    : 800,
                     maxHeight   : 600,
-                    fitToView   : false,
-                    width       : '70%',
-                    height      : '70%',
+                    fitToView   : true,
+                    width       : '90%',
+                    height      : '90%',
                     autoSize    : false,
                     closeClick  : false,
                     openEffect  : 'none',
@@ -50,6 +53,17 @@
         </script>
 
 
+        <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.0";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+        
+        </script>
+
         
 </head>
 
@@ -58,14 +72,7 @@
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
     <div id="fb-root"></div>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.0";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+
     
 
     <!-- Navigation -->
@@ -121,17 +128,35 @@
 	                    <div class="photos" class="col-lg-12">
 		                    <div><%=photo.name%></div>
                             <div><%=photo._id%></div>
+                            <div class="fb-like" data-href="http://young-forest-9275.herokuapp.com/photos/<%=photo._id%>" data-layout="standard" data-action="like" data-show-faces="true" data-share="false"></div>
                             <a class="various" href="#hideInfo_<%=index %>">more detail</a>
 		                    <img class="photos" src='/photos/<%=photo.path%>'/>
                             <div id="hideInfo_<%=index %>" style="display:none;">
                                 hahaah
                                <%=photo.path%> 
+                               <%=photo.longitude%>
+                               <%=photo.latitude%>
+
+                               <script>
+									function initialize() {
+									  var mapProp = {
+									    center:new google.maps.LatLng(51.508742,-0.120850),
+									    zoom:5,
+									    mapTypeId:google.maps.MapTypeId.ROADMAP
+									  };
+									  var map=new google.maps.Map(document.getElementById("googleMap<%=photo._id%>"), mapProp);
+									}
+									google.maps.event.addDomListener(window, 'load', initialize);
+								</script>
+
+                               <div id="googleMap<%=photo._id%>" style="width:500px;height:380px;">
+                               	
+                               </div>
                             </div>
 	                    </div>
                     <% }) %>
 
                     </div>
-                    <div class="fb-like" data-href="http://young-forest-9275.herokuapp.com/photos/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 </div>
             </div>
         </div>
