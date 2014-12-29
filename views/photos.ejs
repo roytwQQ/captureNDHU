@@ -30,6 +30,9 @@
         <link rel="stylesheet" href="../javascripts/thirdParty/fancybox/source/helpers/jquery.fancybox-thumbs.css" type="text/css" media="screen" />
         <script type="text/javascript" src="../javascripts/thirdParty/fancybox/source/helpers/jquery.fancybox-thumbs.js"></script>
 
+		<script type="text/javascript"
+	      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCKxiYt0AMWRbyJ6yimvJ3fBZ0-VeHzYYw&sensor=TRUE">
+	    </script>
 
         <!-- my own code-->
         <script type="text/javascript">
@@ -38,9 +41,9 @@
                 $(".various").fancybox({
                     maxWidth    : 800,
                     maxHeight   : 600,
-                    fitToView   : false,
-                    width       : '70%',
-                    height      : '70%',
+                    fitToView   : true,
+                    width       : '90%',
+                    height      : '90%',
                     autoSize    : false,
                     closeClick  : false,
                     openEffect  : 'none',
@@ -60,6 +63,8 @@
 
         
         </script>
+
+        
 </head>
 
 <!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
@@ -129,6 +134,24 @@
                             <div id="hideInfo_<%=index %>" style="display:none;">
                                 hahaah
                                <%=photo.path%> 
+                               <%=photo.longitude%>
+                               <%=photo.latitude%>
+
+                               <script>
+									function initialize() {
+									  var mapProp = {
+									    center:new google.maps.LatLng(51.508742,-0.120850),
+									    zoom:5,
+									    mapTypeId:google.maps.MapTypeId.ROADMAP
+									  };
+									  var map=new google.maps.Map(document.getElementById("googleMap<%=photo._id%>"), mapProp);
+									}
+									google.maps.event.addDomListener(window, 'load', initialize);
+								</script>
+
+                               <div id="googleMap<%=photo._id%>" style="width:500px;height:380px;">
+                               	
+                               </div>
                             </div>
 	                    </div>
                     <% }) %>

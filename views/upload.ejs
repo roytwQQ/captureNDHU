@@ -121,8 +121,9 @@
         if (navigator.geolocation) {
             // alert('@@');
             navigator.geolocation.getCurrentPosition(showPosition);
+            console.log("good");
         } else { 
-            alert('@@');
+           console.log("gps failed");
         }
     }
 
