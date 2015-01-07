@@ -58,7 +58,7 @@ router.get('/ranking', function(req, res) {
 	    // console.log('shit');
 	    // console.log(photos._id);
 	    var count5 = [];
-
+	    var newData = [];
 
 	    
 
@@ -74,6 +74,12 @@ router.get('/ranking', function(req, res) {
 					  if (!error && response.statusCode == 200) {
 					  	// console.log(photo._id);
 					  	count5.push(JSON.parse(body).data[0].like_count);
+					  	count5.sort();
+					  	count5.reverse();
+					  	count5 = count5.slice(0,5);
+					  	for(var i = 0;i<5;i++){
+					  		newData[i] = photo;
+					  	}
 					    // console.log(JSON.parse(body).data[0].like_count); // Print the google web page。
 					    callback2();
 					  }else{
@@ -88,10 +94,10 @@ router.get('/ranking', function(req, res) {
 		    if( err ) {
 		      // One of the iterations produced an error.
 		      // All processing will now stop.
-		      console.log('A file failed to process');
+		      // console.log('A file failed to process');
 		    } else {
 		    	console.log(count5);
-		      console.log('All files have been processed successfully');
+		      // console.log('All files have been processed successfully');
 		      callback();
 
 		    }
@@ -101,12 +107,18 @@ router.get('/ranking', function(req, res) {
 		    },
 		    function(callback){
 		        // do some more stuff ...
-		        console.log("b");
+		        // console.log("b");
 		        callback();
 		    }
 		],
 		// optional callback
 		function(err, results){
+
+			res.render('ranking', {
+			title: 'ranking',
+			newData: newData,
+			count5: count5
+			});
 			
 		    // results is now equal to ['one', 'two']
 		});
@@ -115,12 +127,9 @@ router.get('/ranking', function(req, res) {
 
 	    
 
-	    console.dir(count5);
+	    
 
-			res.render('ranking', {
-			title: 'ranking',
-			photos: photos
-			});
+			
 	});
 
 
