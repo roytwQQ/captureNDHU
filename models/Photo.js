@@ -6,7 +6,12 @@ var schema = new mongoose.Schema({
 	name: String,
 	latitude: String,
 	longitude: String,
-	path: String
+	path: String,
+	owner: String,
+	date: String,
+	title: String,
+	camera: String,
+	comment: String
 });
 
 module.exports = mongoose.model('Photo', schema);

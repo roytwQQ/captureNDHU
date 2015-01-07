@@ -35,13 +35,13 @@ var directionsService = new google.maps.DirectionsService();
 
 
 		var pinIcon = new google.maps.MarkerImage(
-    "http://www.wide.com.tw/wp-content/uploads/2012/05/link-neighborhood.jpg",
+    localStorage.temp_url,
      new google.maps.Size(50, 50), /* size is determined at runtime */
      new google.maps.Point(50, 50), /* origin is 0,0 */
      new google.maps.Point(0, 0) /* anchor is bottom center of the scaled image */
    
 );  
-		console.log(pinIcon);
+		console.log(localStorage.temp_latitude);
 		// myImage.onload();
 
 		 var marker = new google.maps.Marker({

@@ -64,7 +64,12 @@
 
         <script>
             $(document).ready(function() {
+                console.log($(this).attr('data-href'));
                 $(".picmap").click(function() {
+                    if($(this).attr('data-latitude') == "" || $(this).attr('data-longitude') == ""){
+                        alert("沒有地圖");
+                        return false;
+                    }
                     // console.log($(this).attr('data-latitude'));
                     // console.log($(this).attr('data-longitude'));
                     localStorage.temp_latitude = $(this).attr('data-latitude');
@@ -163,10 +168,34 @@
                                 </a>
                             </div>
                             <div id="hideInfo_<%=index %>" style="display:none;">
-                                hahaah
-                               <%=photo.path%> 
-                               <%=photo.longitude%>
-                               <%=photo.latitude%>
+                                <table class="table table-bordered table-striped">
+                                    <tr>
+                                        <td>Owner</td>
+                                        <td><%=photo.owner%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>名稱</td>
+                                        <td><%=photo.title%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>日期</td>
+                                        <td><%=photo.date%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>秘訣</td>
+                                        <td><%=photo.camera%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>雜記</td>
+                                        <td><%=photo.comment%></td>
+                                    </tr>
+                                    <tr><%=photo.longitude%></tr>
+                                </table>
+                                
+                                
+                              
+                    
+
 
                             
 

@@ -79,15 +79,17 @@
                     <h2>貢獻戰利品</h2>
                         <p>感謝無私分享...</p>
                         <form method='post' enctype='multipart/form-data'>
-                            <div class="col-xs-6 form-group">
+                            <div class="col-xs-5 form-group">
 <input class="form-control" type='text', name='photo[owner]', placeholder='作者'/>
                             </div>
-                            <div class="col-xs-6 ">
-<input class="form-control" type='text', name='photo[date]', placeholder='拍攝日期'/>
+                            <div class="col-xs-7 ">
+                                <input class="form-control" type='text', name='photo[title]', placeholder='主題'/>
+
                             </div>
 
                             <div class="col-xs-12 form-group">
-<input class="form-control" type='text', name='photo[title]', placeholder='主題'/>
+                                <input class="form-control" type='text', name='photo[date]', placeholder='拍攝日期'/>
+
                             </div>
 
                             <div class="col-xs-12 form-group">
@@ -95,7 +97,7 @@
                             </div>
 
                             <div class="col-xs-12 form-group">
- <textarea class="form-control" type='text', name='photo[name]', placeholder='註解'></textarea>
+ <textarea class="form-control" type='text', name='photo[comment]', placeholder='註解'></textarea>
                             </div>
                             
                             <div class="col-xs-12 form-group">
@@ -144,10 +146,12 @@
 <script>
     $(document).ready(function(){
        
-
+        $( "input[name$='photo[date]']" ).val( new Date() );
         var userAgent =  navigator.userAgent;
     var isMobile = userAgent.match("Mobile");
    
+
+
    if(isMobile != null){
      getLocation();
 

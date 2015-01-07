@@ -50,6 +50,13 @@ router.post('/upload', multipartMiddleware, function(req, res, next) {
 
 var longitude = req.body.photo.longitude;
 var latitude = req.body.photo.latitude;
+var owner = req.body.photo.owner;
+var title = req.body.photo.title;
+var date = req.body.photo.date;
+var camera = req.body.photo.camera;
+var comment = req.body.photo.comment;
+
+
 
 var img = req.files.photo.image;
 var name = req.body.photo.name || img.name;
@@ -66,7 +73,12 @@ is.on('end',function() {
 	name: name,
 	longitude: longitude,
 	latitude: latitude,
-	path: nowTime+img.name 
+	path: nowTime+img.name,
+	owner:owner,
+	title: title,
+	camera: camera,
+	comment: comment,
+	date: date
 	}, function (err) {
 	if (err) return next(err);
 	res.redirect('/photos');
