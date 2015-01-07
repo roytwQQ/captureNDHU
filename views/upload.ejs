@@ -3,7 +3,7 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui, user-scalable=0">
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -72,20 +72,50 @@
     </nav>
 
     <!-- Intro Section -->
-    <section id="intro" class="intro-section"  >
+    <section id="" class=""  style="padding-top:50px;">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <h1><%= title %></h1>
-                        <p>Upload a photo to your account below.</p>
+                <div class="col-xs-12">
+                    <h2>貢獻戰利品</h2>
+                        <p>感謝無私分享...</p>
                         <form method='post' enctype='multipart/form-data'>
-                        
-                            <input type='text', name='photo[name]', placeholder='Name'/>
-                            <input type='file', name='photo[image]'/>
+                            <div class="col-xs-6 form-group">
+<input class="form-control" type='text', name='photo[owner]', placeholder='作者'/>
+                            </div>
+                            <div class="col-xs-6 ">
+<input class="form-control" type='text', name='photo[date]', placeholder='拍攝日期'/>
+                            </div>
+
+                            <div class="col-xs-12 form-group">
+<input class="form-control" type='text', name='photo[title]', placeholder='主題'/>
+                            </div>
+
+                            <div class="col-xs-12 form-group">
+<textarea class="form-control" type='text', name='photo[camera]', placeholder='拍攝細節'></textarea>
+                            </div>
+
+                            <div class="col-xs-12 form-group">
+ <textarea class="form-control" type='text', name='photo[name]', placeholder='註解'></textarea>
+                            </div>
+                            
+                            <div class="col-xs-12 form-group">
+<input  type='file', name='photo[image]'/>
+                            </div>
+                            
+                            
+
+                            
+                            
+                            
+                           
 
                              <input style="display:none;" id="longitude" type='text', name='photo[longitude]', placeholder='@@'/>
                              <input style="display:none;" id="latitude" type='text', name='photo[latitude]', placeholder='@@'/>
-                        <p><input type='submit', value='Upload'/></p>
+
+                             <div class="col-xs-12 form-group">
+                                <input class="btn btn-primary" type='submit', value='Upload'/>
+                             </div>
+                        
                         </form>
                 </div>
             </div>
@@ -95,11 +125,11 @@
     
 
 
-    <div class="footer">
+    <!-- <div class="footer">
       <div class="container">
         <p class="text-muted">Place sticky footer content here.</p>
       </div>
-    </div>
+    </div> -->
 
     <!-- jQuery Version 1.11.0 -->
     <script src="../javascripts/thirdParty/jquery-2.1.1.min.js"></script>
@@ -113,9 +143,21 @@
 
 <script>
     $(document).ready(function(){
-        getLocation();
+       
+
+        var userAgent =  navigator.userAgent;
+    var isMobile = userAgent.match("Mobile");
+   
+   if(isMobile != null){
+     getLocation();
+
+   }else{
+    alert("it's desktop");
+   }
 
     });
+
+    
 
     function getLocation() {
         if (navigator.geolocation) {
@@ -128,6 +170,7 @@
     }
 
     function showPosition(position) {
+        console.log(position.coords);
         // alert(position.coords.latitude);
         $("#latitude").val(position.coords.latitude);
         $("#longitude").val(position.coords.longitude);
