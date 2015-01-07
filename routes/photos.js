@@ -4,6 +4,8 @@ var router = express.Router();
 var Photo = require('../models/Photo');
 var path = require('path');
 var fs = require('fs');
+var request = require('request');
+var async = require('async');
 var join = path.join;
 
 //form express4, upload multipart(img), use bellow
@@ -43,6 +45,86 @@ router.get('/upload', function(req, res) {
 	});
 
 
+});
+
+router.get('/ranking', function(req, res) {
+
+	Photo.find()
+	.sort({'_id': -1})
+	.exec(function(err, photos) {
+	    // code here
+	    if (err) return next(err);
+
+	    // console.log('shit');
+	    // console.log(photos._id);
+	    var count5 = [];
+
+
+	    
+
+
+
+	    async.series([
+		    function(callback){
+		    	async.each(photos, function(photo, callback2) {
+
+		  // Perform operation on file here.
+		  // console.log('Processing file ' + photo);
+		  request('https://graph.facebook.com/fql?q=select%20%20like_count%20from%20link_stat%20where%20url="http://young-forest-9275.herokuapp.com/photos/'+photo._id+'"', function (error, response, body) {
+					  if (!error && response.statusCode == 200) {
+					  	// console.log(photo._id);
+					  	count5.push(JSON.parse(body).data[0].like_count);
+					    // console.log(JSON.parse(body).data[0].like_count); // Print the google web page。
+					    callback2();
+					  }else{
+					  	console.log(body);
+					  }
+					});
+		   
+		    
+		  
+		}, function(err){
+		    // if any of the file processing produced an error, err would equal that error
+		    if( err ) {
+		      // One of the iterations produced an error.
+		      // All processing will now stop.
+		      console.log('A file failed to process');
+		    } else {
+		    	console.log(count5);
+		      console.log('All files have been processed successfully');
+		      callback();
+
+		    }
+		});
+
+		    		
+		    },
+		    function(callback){
+		        // do some more stuff ...
+		        console.log("b");
+		        callback();
+		    }
+		],
+		// optional callback
+		function(err, results){
+			
+		    // results is now equal to ['one', 'two']
+		});
+
+
+
+	    
+
+	    console.dir(count5);
+
+			res.render('ranking', {
+			title: 'ranking',
+			photos: photos
+			});
+	});
+
+
+	
 });
 
 
