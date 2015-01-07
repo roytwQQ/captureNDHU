@@ -67,7 +67,7 @@
                 console.log($(this).attr('data-href'));
                 $(".picmap").click(function() {
                     if($(this).attr('data-latitude') == "" || $(this).attr('data-longitude') == ""){
-                        alert("沒有地圖");
+                        alert("這張照片沒有位置資訊喔><");
                         return false;
                     }
                     // console.log($(this).attr('data-latitude'));
@@ -154,7 +154,7 @@
                             <div style="margin:5px 0;">
 
                                 
-                                <a id="map_<%=photo._id%>" data-href="http://young-forest-9275.herokuapp.com/photos/<%=photo._id%>" data-latitude="<%=photo.latitude%>" data-longitude="<%=photo.longitude%>" class="btn btn-default various fancybox.iframe picmap" href="/picmap.htm">map</a>
+                                <a id="map_<%=photo._id%>" data-href="http://192.168.1.4:3000/photos/<%=photo.path%>" data-latitude="<%=photo.latitude%>" data-longitude="<%=photo.longitude%>" class="btn btn-default various fancybox.iframe picmap" href="/picmap.htm">map</a>
                             
                             
                             <a class="btn btn-default various" href="#hideInfo_<%=index %>">more detail</a>
@@ -189,7 +189,7 @@
                                         <td>雜記</td>
                                         <td><%=photo.comment%></td>
                                     </tr>
-                                    <tr><%=photo.longitude%></tr>
+                                    
                                 </table>
                                 
                                 

@@ -156,7 +156,7 @@
      getLocation();
 
    }else{
-    alert("it's desktop");
+    // alert("it's desktop");
    }
 
     });
@@ -166,13 +166,15 @@
     function getLocation() {
         if (navigator.geolocation) {
             // alert('@@');
-            navigator.geolocation.getCurrentPosition(showPosition);
+            navigator.geolocation.getCurrentPosition(showPosition,err,{enableHighAccuracy:true, maximumAge:1000});
             console.log("good");
         } else { 
            console.log("gps failed");
         }
     }
+    function err(cb){
 
+    }
     function showPosition(position) {
         console.log(position.coords);
         // alert(position.coords.latitude);
