@@ -33,7 +33,16 @@
     <!-- Scrolling Nav JavaScript -->
     <script src="../javascripts/thirdParty/jquery.easing.min.js"></script>
     <script src="../javascripts/thirdParty/scrolling-nav.js"></script>
+   
+    <script>
+      $(document).ready(function(){
 
+        
+
+      });
+        
+        // imageObj.src = 'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg';
+    </script>
 
 </head>
 
@@ -51,7 +60,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Start Bootstrap</a>
+                <a class="navbar-brand page-scroll" href="#page-top">Ranking Board</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -81,11 +90,25 @@
     <!-- Intro Section -->
     <section id="" class=""  style="padding-top:50px;">
         <div class="container">
-            <div class="row">
+            <div class="row" style="margin-top:10px;">
                 <% count5.forEach(function(cc, index) { %>
-                <div class="col-sm-4">
-                    <%=cc %>
-                    <img style="width:90%" src="/photos/<%=cc.b.path %>">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-12" style="margin-bottom:5px;margin-top:20px;">
+                             No.
+                    <%= index+1 %>
+                    <%= cc.split("~")[2] %>
+                    by<%= cc.split("~")[3] %> 
+                    <a  class="btn btn-info btn-sm" href="<%= cc.split("~")[1] %>" download="<%= cc.split("~")[1] %>">珍藏</a>
+                        </div>
+                    </div>
+                   
+                   
+                     <img class="img-thumbnail" id="test" style="width:90%" src="<%= cc.split("~")[1] %>">
+                   
+                   
+                    
+                    
                 </div>
                 <% }) %>
             </div>
