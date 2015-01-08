@@ -58,7 +58,7 @@ router.get('/ranking', function(req, res) {
 	    // console.log('shit');
 	    // console.log(photos._id);
 	    var count5 = [];
-	    var newData = [];
+	    var newDatas = [];
 
 	    
 
@@ -67,19 +67,20 @@ router.get('/ranking', function(req, res) {
 	    async.series([
 		    function(callback){
 		    	async.each(photos, function(photo, callback2) {
-
+		    		var i = 0;
 		  // Perform operation on file here.
 		  // console.log('Processing file ' + photo);
 		  request('https://graph.facebook.com/fql?q=select%20%20like_count%20from%20link_stat%20where%20url="http://young-forest-9275.herokuapp.com/photos/'+photo._id+'"', function (error, response, body) {
 					  if (!error && response.statusCode == 200) {
 					  	// console.log(photo._id);
-					  	count5.push(JSON.parse(body).data[0].like_count);
+					  	count5.push({"a":JSON.parse(body).data[0].like_count,"b":photo});
 					  	count5.sort();
 					  	count5.reverse();
 					  	count5 = count5.slice(0,5);
-					  	for(var i = 0;i<5;i++){
-					  		newData[i] = photo;
-					  	}
+					  	
+					  	
+					  		// newDatas[i] = photo;
+					  		// ++i;
 					    // console.log(JSON.parse(body).data[0].like_count); // Print the google web page。
 					    callback2();
 					  }else{
@@ -113,10 +114,10 @@ router.get('/ranking', function(req, res) {
 		],
 		// optional callback
 		function(err, results){
-
+			
 			res.render('ranking', {
 			title: 'ranking',
-			newData: newData,
+			newDatas:newDatas,
 			count5: count5
 			});
 			
